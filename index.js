@@ -3,11 +3,7 @@ import data from "./data.json" assert { type: 'json' };
 console.log(data)
 console.log(data.films)
 
-const dataFilms = data.films;
-
-
-
-const cardsHtml = dataFilms.map((element)=>{
+const cardsHtml = data.films.map((element)=>{
     return `<div class="image-wrapper">
       <img src="${element.Images[0]}" alt="${element.Title}" />
     </div>
@@ -24,9 +20,10 @@ const cardsHtml = dataFilms.map((element)=>{
     </div>`
   }).join ("")
   console.log(cardsHtml)
-  document.querySelector(".movie-item").innerHTML = cardsHtml
+ document.querySelector(".movie-item").innerHTML = cardsHtml
+
+
  
-  movieContainer.innerHTML = cardsHtml;
 
 
 
