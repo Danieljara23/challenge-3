@@ -20,7 +20,7 @@ const cardsHtml = data.films.map((element)=>{
     </div>`
   }).join ("")
   console.log(cardsHtml)
- document.querySelector(".movies-container").innerHTML = cardsHtml  //Esta es la linea que le digo//
+ document.querySelector(".movies-container").innerHTML = cardsHtml  
  
 
 
