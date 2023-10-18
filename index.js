@@ -29,7 +29,7 @@ const filmsHtml = data.films.map((element) => {
     `
 }).join("")
 
-document.getElementById("container").innerHTML = filmsHtml
+document.getElementsByClassName("movies-container")[0].innerHTML = filmsHtml
 
 const buttons = document.querySelectorAll(".filter-button")
 
@@ -67,7 +67,7 @@ buttons.forEach(buttonElement => {
       `;
     }).join("")
 
-    document.getElementById("container").innerHTML = filteredFilmsHTML
+    document.getElementsByClassName("movies-container")[0].innerHTML = filteredFilmsHTML
   })
 })
 
