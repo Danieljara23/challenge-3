@@ -65,7 +65,6 @@ document.querySelectorAll(".filter-button").forEach((buttonElement) => {
         `;
         })
         .join("");
-    //   document.getElementById("container").innerHTML = newdataHtml;
     document.querySelector(".movies-container").innerHTML = newdataHtml;
     });
   });
