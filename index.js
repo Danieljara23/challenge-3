@@ -1,43 +1,71 @@
 import data from "./data.json" assert { type: 'json' };;
 
-const filmsHtml = data.films
- .map((filmsElement) => {
-    return `
-    <h4>${pelicula.Title}</h4>
-    <p><strong>Género:</strong> ${pelicula.Genre}</p>
-    <p><strong>Calificación:</strong> ${pelicula.Rated}</p>
-    <p><strong>Argumento:</strong> ${pelicula.Plot}</p>
-    <img src="${pelicula.Images}" alt="${pelicula.Title}" />
-    `;
-  })
+console.log(data)
+console.log(data.films)
+
+const movieHtml = data.films.map((filmsElement) => {
+  return `
+    <article class="movie-item">
+        <div class="content">
+        <div class="image-wrapper">
+          <img
+            src="${filmsElement.Images}"
+            alt=""
+          />
+          <h4>${filmsElement.Title}</h4>
+          <div class="score-wrapper">
+          <img src="./assets/star.svg" alt="Ícono de una estrella" />
+          <p class="score">${filmsElement.imdbRating}</p>
+          <span class="genre">${filmsElement.Genre}</span>
+          </div>
+          <p class="plot"> ${filmsElement.Plot}</p>
+        </div>
+      </article>
+  `;
+})
   .join("");
-  document.getElementById("movies-container").innerHTML = filmsHtml
 
-  const buttons = document.querySelectorAll(".filter-button")
-  
-  buttons.forEach(buttonElement => {
-    buttonElement.addEventListener("click", (event)=>{
-      console.log(event.target.innerHTML)
-      const selectedButtonText = event.target.innerText;
+const moviesContainer = document.querySelector(".movies-container");
 
-      const filteredFilms = data.films.filter((filmsElement) => filmsElement.Genre === selectedButtonText.toLowerCase())
-      console.log(filteredFilms)
+if (moviesContainer) {
+  moviesContainer.innerHTML = movieHtml;
+} else {
+  console.error("Element with class 'movies-container' not found");
+}
 
-      const filteredFilmsHtml = filteredFilms.map((filmsElement) => {
+
+document.querySelectorAll(".filter-button").forEach((buttonElement) => {
+  buttonElement.addEventListener("click", (e) => {
+    console.log(e.target.textContent);
+
+    const selectedType = e.target.innerText;
+    const ndata = data.films.filter(
+      (element) => element.Genre.includes(selectedType)
+    );
+
+    const ndataHtml = ndata
+      .map((filmsElement) => {
         return `
-        <h4>${pelicula.Title}</h4>
-        <p><strong>Género:</strong> ${pelicula.Genre}</p>
-        <p><strong>Calificación:</strong> ${pelicula.Rated}</p>
-        <p><strong>Argumento:</strong> ${pelicula.Plot}</p>
-        <img src="${pelicula.Images}" alt="${pelicula.Title}" />
+        <article class="movie-item">
+        <div class="content">
+        <div class="image-wrapper">
+          <img
+            src="${filmsElement.Images}"
+            alt=""
+          />
+          <h4>${filmsElement.Title}</h4>
+          <div class="score-wrapper">
+          <img src="./assets/star.svg" alt="Ícono de una estrella" />
+          <p class="score">${filmsElement.imdbRating}</p>
+          <span class="genre">${filmsElement.Genre}</span>
+          </div>
+          <p class="plot"> ${filmsElement.Plot}</p>
+        </div>
+      </article>
         `;
       })
       .join("");
 
-      document.getElementById("movies-container").innerHTML = filteredFilmsHtml
-
-    })
-  })
-
-console.log(data)
-console.log(data.films)
+    document.querySelector(".movies-container").innerHTML = ndataHtml
+  });
+});
